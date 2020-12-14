@@ -7,7 +7,7 @@ const ThreeCanvas = ({children}) => {
       <OrbitControls
         screenSpacePanning = {true}
         autoRotate = {true} autoRotateSpeed = {1.0}
-        enableZoom = {true} maxZoom = {2.5} minZoom = {0.5}
+        enableZoom = {true} maxZoom = {100} minZoom = {25}
         />
       {children}
     </Canvas>

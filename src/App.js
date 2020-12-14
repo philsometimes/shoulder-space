@@ -2,21 +2,24 @@ import React from 'react'
 import { OrthographicCamera } from 'drei'
 import ThreeCanvas from './ThreeCanvas'
 import Tandem from './views/Tandem'
+import Portal from './views/Portal'
+
+import ParticleGrid from './views/ParticleGrid'
 
 const App = () => {
   return (
     <ThreeCanvas>
-      <OrthographicCamera makeDefault={true} position={[0, 0, 100]} zoom={1} />
+      <OrthographicCamera makeDefault={true} position={[0, 0, 100]} zoom={50} />
       <Tandem viewCube={true}>
         <mesh>
-          <torusBufferGeometry attach="geometry" args={[60, 30, 32, 100]} />
+          <torusBufferGeometry attach="geometry" args={[1.5, 0.5, 32, 100]} />
           <meshNormalMaterial attach="material" />
         </mesh>
         <mesh>
-          <torusBufferGeometry attach="geometry" args={[60, 30, 32, 100]} />
-          <meshNormalMaterial attach="material" />
+          <Portal />
         </mesh>
       </Tandem>
+
     </ThreeCanvas>
   )
 }
