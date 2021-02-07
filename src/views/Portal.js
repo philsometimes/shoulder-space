@@ -2,18 +2,22 @@ import { Scene, Matrix4 } from 'three'
 import React, { useContext, useState, useRef, useEffect, useMemo } from 'react'
 import { Canvas, useFrame, useThree, createPortal } from 'react-three-fiber'
 import { OrbitControls, OrthographicCamera, useCamera } from 'drei'
+import useRaycasterOffset from '../hooks/useRaycasterOffset'
+import getMouseOffset from '../helpers/offsetPointer'
 
 const Box = (props) => {
+  const offset = useRaycasterOffset('right')
   const mesh = useRef()
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
+  const coords = [100, 200]
   return (
     <mesh
      {...props}
      ref={mesh}
      scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
      onClick={(event) => setActive(!active)}
-     onPointerOver={(event) => setHover(true)}
+     onPointerOver={(event) => {setHover(true); getMouseOffset(event, offset.x, offset.y)}}
      onPointerOut={(event) => setHover(false)}>
      <boxBufferGeometry args={[1, 1, 1]} />
      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />

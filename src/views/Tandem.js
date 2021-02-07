@@ -2,6 +2,7 @@ import { Scene, Matrix4 } from 'three'
 import React, { useRef, useEffect, useMemo, useState } from 'react'
 import { Canvas, useFrame, useThree, createPortal } from 'react-three-fiber'
 import { OrbitControls, OrthographicCamera, PerspectiveCamera, useCamera } from 'drei'
+import layout from './tandemLayout'
 
 const Tandem = ({children, viewCube}) => {
   const { gl, scene, camera, size } = useThree()
@@ -26,8 +27,8 @@ const Tandem = ({children, viewCube}) => {
   useFrame(() => {
     const w = size.width
     const h = size.height
-    virtualCam1.current.setViewOffset(w, h, w*3/8, h/4, w/2, h/2)
-    virtualCam2.current.setViewOffset(w, h, w/8, h/4, w/2, h/2)
+    virtualCam1.current.setViewOffset(w*layout.left.fullWidth, h*layout.left.fullHeight, w*layout.left.x, h*layout.left.y, w*layout.left.width, h*layout.left.height)
+    virtualCam2.current.setViewOffset(w*layout.right.fullWidth, h*layout.right.fullHeight, w*layout.right.x, h*layout.right.y, w*layout.right.width, h*layout.right.height)
     matrix.copy(camera.matrix).invert()
     ref1.current.quaternion.setFromRotationMatrix(matrix)
     ref2.current.quaternion.setFromRotationMatrix(matrix)
